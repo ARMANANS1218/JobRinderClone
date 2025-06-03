@@ -44,56 +44,56 @@ const App = () => {
     },
   ];
 
-  const employers = [
-    {
-      name: "Google",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
-    },
-    {
-      name: "Microsoft",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
-    },
-    {
-      name: "Amazon",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
-    },
-    {
-      name: "Facebook",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png",
-    },
-    {
-      name: "Apple",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
-    },
-    {
-      name: "IBM",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
-    },
-    {
-      name: "Netflix",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
-    },
-    {
-      name: "Tesla",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg",
-    },
-    {
-      name: "Intel",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Intel-logo.svg",
-    },
-    {
-      name: "Adobe",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Adobe_Corporate_Logo.png",
-    },
-    {
-      name: "Oracle",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg",
-    },
-    {
-      name: "LinkedIn",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg",
-    },
-  ];
+ const employers = [
+  {
+    name: "Google",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
+  },
+  {
+    name: "Microsoft",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg",
+  },
+  {
+    name: "Amazon",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+  },
+  {
+    name: "Facebook",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png",
+  },
+  {
+    name: "Apple",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+  },
+  {
+    name: "IBM",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+  },
+  {
+    name: "Netflix",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
+  },
+  {
+    name: "Tesla",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg",
+  },
+  {
+    name: "Intel",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Intel-logo.svg",
+  },
+  {
+    name: "Adobe",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Adobe_Corporate_Logo.png",
+  },
+  {
+    name: "Oracle",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg",
+  },
+  {
+    name: "LinkedIn",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/0/01/LinkedIn_Logo.svg",
+  },
+];
 
   const jobCategories = [
     "#Fresher",
@@ -221,35 +221,25 @@ const App = () => {
         </h2>
 
         <div className="relative">
-          <div className="bg-white py-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-                FEATURED <span className="text-blue-600">EMPLOYERS</span>
-              </h2>
-
-              <div className="relative">
-                {/* Scrollable container */}
-                <div className="flex overflow-x-auto gap-6 scrollbar-hide px-2">
-                  {employers.map((employer, index) => (
-                    <div
-                      key={index}
-                      className="min-w-[80px] h-20 flex-shrink-0 flex justify-center items-center bg-white border rounded-lg shadow hover:shadow-md transition p-2"
-                    >
-                      <img
-                        src={employer.logo}
-                        alt={employer.name}
-                        className="max-h-full max-w-full object-contain"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = "/logos/default.png";
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+          <Swiper
+            modules={[Navigation]}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            spaceBetween={20}
+            slidesPerView={1}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 4 },
+            }}
+          >
+            {featuredJobs.map((job, index) => (
+              <SwiperSlide key={index}>
+                <JobCard job={job} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
           {/* Custom Navigation Buttons */}
           <div className="swiper-button-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-white p-2 rounded-full shadow-md">
